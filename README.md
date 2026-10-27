@@ -1,4 +1,4 @@
-
+TÜRKÇE YAMA WEB SİTESİ
 
 Bu sürüm LocalStorage yerine Node.js + Express + MongoDB kullanır. Panelden eklenen, güncellenen ve silinen yamalar MongoDB'de tutulur ve siteyi ziyaret eden herkes aynı verileri görür.
 
@@ -9,7 +9,7 @@ Bu sürüm LocalStorage yerine Node.js + Express + MongoDB kullanır. Panelden e
 3. Bağımlılıkları kurun:
 
 ```bash
-npm install
+npm installgit add README.md
 ```
 
 4. `.env` dosyasını kontrol edin:
