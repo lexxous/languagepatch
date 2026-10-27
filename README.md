@@ -1,6 +1,6 @@
-# LEXXOUS | Türkçe Yama Platformu
+# | Türkçe Yama Platformu
 
-LEXXOUS, PC oyunları için Türkçe yamaları keşfetmeyi, incelemeyi ve yönetmeyi sağlayan bir web platformudur. Node.js, Express ve MongoDB altyapısıyla geliştirilen proje, oyun yamalarının merkezi bir veritabanında saklanmasını ve tüm ziyaretçilere aynı verilerin sunulmasını amaçlar.
+PC oyunları için Türkçe yamaları keşfetmeyi, incelemeyi ve yönetmeyi sağlayan bir web platformu! Node.js, Express ve MongoDB altyapısıyla geliştirilen proje, oyun yamalarının merkezi bir veritabanında saklanmasını ve tüm ziyaretçilere aynı verilerin sunulmasını amaçlıyor.
 
 ## Özellikler
 
@@ -168,4 +168,4 @@ Bu projeye ait lisans henüz belirtilmemiştir. Yeniden kullanım ve dağıtım 
 
 ---
 
-**LEXXOUS — Oyunlar için Türkçe yama platformu.**
+**Oyunlar için Türkçe yama platformu.**
