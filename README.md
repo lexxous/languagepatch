@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # TR-NEXUS Türkçe Yama Platformu
 
 Bu sürüm LocalStorage yerine Node.js + Express + MongoDB kullanır. Panelden eklenen, güncellenen ve silinen yamalar MongoDB'de tutulur ve siteyi ziyaret eden herkes aynı verileri görür.
@@ -45,3 +46,7 @@ npm run dev
 - `POST /api/translations/:id/comments` — yorum ekleme
 - `POST /api/translations/:id/rate` — puan verme
 - `POST /api/translations/:id/download` — indirme sayısını artırma
+=======
+# T-rk-e-Yama-eviri-Sitesi
+Bu proje, basit bir Türkçe yama web sitesi örneğidir. Gerçek bir sistemi yansıtmamaktadır.
+>>>>>>> bf28c2395cf5d230f79c21d734d56f3de92cf027
