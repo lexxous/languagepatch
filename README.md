@@ -1,19 +1,19 @@
-# Türkçe Yama Platformu
+# Turkish Patch Platform
 
-PC oyunları için Türkçe yamaları keşfetmeyi, incelemeyi ve yönetmeyi sağlayan bir web platformu! Node.js, Express ve MongoDB altyapısıyla geliştirilen proje, oyun yamalarının merkezi bir veritabanında saklanmasını ve tüm ziyaretçilere aynı verilerin sunulmasını amaçlıyor.
+A web platform for discovering, reviewing, and managing Turkish language patches for PC games. Built with Node.js, Express, and MongoDB, the project provides a centralized database for storing and sharing patch information.
 
-## Özellikler
+## Features
 
-- **Yama listeleme:** Oyunların açıklamalarını, geliştiricilerini, sürümlerini ve platform bilgilerini görüntüleme.
-- **Yönetim paneli:** Yeni yama ekleme, mevcut yamaları düzenleme ve silme.
-- **MongoDB entegrasyonu:** Verilerin kalıcı olarak veritabanında saklanması.
-- **Yama detayları:** Çevirmen, ilerleme durumu, indirme bağlantıları ve görseller.
-- **Yorum sistemi:** Yamalar hakkında kullanıcı yorumları.
-- **Puanlama sistemi:** Kullanıcıların yamalara puan verebilmesi.
-- **İndirme takibi:** Yama indirme sayılarının kaydedilmesi.
-- **REST API:** Frontend ile backend arasında veri iletişimi.
+- **Patch Listing:** Browse game descriptions, translators, versions, and supported platforms.
+- **Admin Panel:** Add, edit, and delete patches through a dedicated management interface.
+- **MongoDB Integration:** Store patch data persistently in a centralized database.
+- **Patch Details:** Display translator information, translation progress, download links, and images.
+- **Comment System:** Allow users to share feedback on individual patches.
+- **Rating System:** Let users rate available patches.
+- **Download Tracking:** Record the number of downloads for each patch.
+- **REST API:** Provide communication between the frontend and backend.
 
-## Teknolojiler
+## Tech Stack
 
 - HTML5
 - CSS3
@@ -25,89 +25,96 @@ PC oyunları için Türkçe yamaları keşfetmeyi, incelemeyi ve yönetmeyi sağ
 - dotenv
 - Nodemon
 
-## Kurulum
+## Installation
 
-### Gereksinimler
+### Prerequisites
+
+Make sure you have the following installed:
 
 - [Node.js](https://nodejs.org/)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community) veya [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
-- Git (isteğe bağlı)
+- [MongoDB Community Server](https://www.mongodb.com/try/download/community) or [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
+- Git (optional)
 
-### 1. Projeyi indirin
+### 1. Clone the Repository
 
 ```bash
 git clone <repository-url>
 cd turkce-yama-platform
 ```
 
-Alternatif olarak GitHub üzerinden ZIP dosyasını indirebilir ve proje klasörüne çıkarabilirsiniz.
+Alternatively, download the repository as a ZIP file from GitHub and extract it.
 
-### 2. Bağımlılıkları yükleyin
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Ortam değişkenlerini yapılandırın
+### 3. Configure Environment Variables
 
-Proje ana dizininde `.env.example` dosyasını kopyalayarak `.env` adında yeni bir dosya oluşturun.
+Copy `.env.example` to a new file named `.env`.
 
-Windows PowerShell:
+On Windows PowerShell:
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-`.env` dosyasını kendi ortamınıza göre düzenleyin:
+Configure the environment variables in your `.env` file:
 
 ```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/turkce_yama
 ADMIN_USER=admin
-ADMIN_PASSWORD=guclu_ve_benzersiz_bir_sifre
+ADMIN_PASSWORD=your_strong_unique_password
 ```
 
-`MONGO_URI`, MongoDB bağlantı adresidir. Yerel MongoDB kullanıyorsanız MongoDB servisinin çalıştığından emin olun. MongoDB Atlas kullanıyorsanız bağlantı adresinizi buraya girin.
+- `PORT`: The port used by the Express server.
+- `MONGO_URI`: Your MongoDB connection string.
+- `ADMIN_USER`: The administrator username.
+- `ADMIN_PASSWORD`: The administrator password.
 
-**Güvenlik:** `ADMIN_PASSWORD` değerini değiştirin. `.env` dosyasını GitHub'a yüklemeyin ve gizli bilgilerinizi kimseyle paylaşmayın.
+If you use a local MongoDB instance, ensure the MongoDB service is running. If you use MongoDB Atlas, replace the connection string with your Atlas URI.
 
-### 4. Sunucuyu başlatın
+**Security:** Use a strong, unique administrator password. Never commit your `.env` file or expose your credentials publicly.
 
-Geliştirme modu:
+### 4. Start the Server
+
+Development mode:
 
 ```bash
 npm run dev
 ```
 
-Normal başlatma:
+Production-style startup:
 
 ```bash
 npm start
 ```
 
-MongoDB bağlantısı başarılı olduğunda siteye aşağıdaki adres üzerinden erişebilirsiniz:
+Once the server starts and connects to MongoDB, open:
 
 **http://localhost:5000**
 
-Siteyi doğrudan `index.html` dosyasını açarak çalıştırmayın. API bağlantısı için Node.js sunucusunun çalışması gerekir.
+Do not open `index.html` directly in your browser. The application requires the Node.js server to handle API requests.
 
-## API Uç Noktaları
+## API Endpoints
 
-| Metot | Uç nokta | Açıklama |
+| Method | Endpoint | Description |
 |---|---|---|
-| `GET` | `/api/test` | API bağlantısını kontrol eder. |
-| `GET` | `/api/translations` | Tüm yamaları getirir. |
-| `GET` | `/api/translations/:id` | Belirli bir yamayı getirir. |
-| `POST` | `/api/translations` | Yeni yama ekler. |
-| `PUT` | `/api/translations/:id` | Bir yamayı günceller. |
-| `DELETE` | `/api/translations/:id` | Bir yamayı siler. |
-| `POST` | `/api/translations/:id/comments` | Yorum ekler. |
-| `POST` | `/api/translations/:id/rate` | Yama puanlaması yapar. |
-| `POST` | `/api/translations/:id/download` | İndirme sayısını artırır. |
+| `GET` | `/api/test` | Check API connectivity |
+| `GET` | `/api/translations` | Retrieve all patches |
+| `GET` | `/api/translations/:id` | Retrieve a specific patch |
+| `POST` | `/api/translations` | Create a new patch |
+| `PUT` | `/api/translations/:id` | Update an existing patch |
+| `DELETE` | `/api/translations/:id` | Delete a patch |
+| `POST` | `/api/translations/:id/comments` | Add a comment |
+| `POST` | `/api/translations/:id/rate` | Submit a patch rating |
+| `POST` | `/api/translations/:id/download` | Increment the download count |
 
-Yönetim gerektiren işlemler sunucu tarafındaki yetkilendirme kontrollerine tabidir.
+Administrative operations are subject to server-side authorization checks.
 
-## Proje Yapısı
+## Project Structure
 
 ```text
 turkce-yama-platform/
@@ -134,34 +141,36 @@ turkce-yama-platform/
 └── server.js
 ```
 
-- `server.js`: Express sunucusu ve MongoDB bağlantısı.
-- `models/Translation.js`: Yama verilerinin Mongoose şeması.
-- `routes/translations.js`: Yama işlemlerini yöneten API rotaları.
-- `routes/admin.js`: Yönetici işlemleri.
-- `middleware/adminAuth.js`: Yönetici yetkilendirme katmanı.
-- `public/`: Kullanıcı arayüzü ve frontend dosyaları.
+### Key Files
 
-## Yayınlama
+- `server.js` — Initializes the Express server and connects to MongoDB.
+- `models/Translation.js` — Defines the Mongoose schema for patch data.
+- `routes/translations.js` — Handles patch-related API endpoints.
+- `routes/admin.js` — Manages administrative routes.
+- `middleware/adminAuth.js` — Handles administrator authorization.
+- `public/` — Contains frontend pages, stylesheets, and JavaScript files.
 
-Projeyi internette yayınlamak için Node.js destekleyen bir hosting servisi ve erişilebilir bir MongoDB veritabanı gerekir.
+## Deployment
 
-Örnek altyapı:
+To deploy the platform, you need a hosting provider that supports Node.js and an accessible MongoDB database.
 
-- **Hosting:** Render veya benzeri bir Node.js platformu.
-- **Veritabanı:** MongoDB Atlas.
-- **Kaynak kodu:** GitHub.
+A possible deployment setup:
 
-Yayınlama sırasında `MONGO_URI`, `ADMIN_USER` ve `ADMIN_PASSWORD` gibi ortam değişkenlerini hosting servisinin ayarlarından tanımlayın. Üretim ortamında yönetici şifresini değiştirin ve yetkilendirme mekanizmasını kontrol edin.
+- **Hosting:** [Render](https://render.com/) or another Node.js hosting provider.
+- **Database:** [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+- **Version Control:** [GitHub](https://github.com/).
 
-## Katkıda Bulunma
+Configure the required environment variables in your hosting provider's dashboard. Before deployment, verify the administrator authentication system, protect sensitive credentials, and ensure that production settings are configured securely.
 
-Projeye katkıda bulunmak için:
+## Contributing
 
-1. Repository'yi fork edin.
-2. Yeni bir branch oluşturun.
-3. Değişikliklerinizi yapın ve test edin.
-4. Pull request gönderin.
+Contributions are welcome.
 
-## Lisans
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Implement and test your changes.
+4. Submit a pull request.
 
-Bu projeye ait lisans henüz belirtilmemiştir. Yeniden kullanım ve dağıtım koşulları için repository sahibinin lisans tercihi açıklanmalıdır.
+## License
+
+No license has been specified yet. Until a license is added to the repository, reuse and redistribution permissions are not explicitly granted.
