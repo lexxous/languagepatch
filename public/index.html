@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yama</title>
+  <meta name="description"
+    content="En popüler oyunların en güncel ve güvenilir Türkçe yamaları. Sade arayüz, sıfır reklam, hızlı indirme.">
+  <!-- Google Fonts - Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <link rel="icon" type="image/png" href="png/favicon.png">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+
+  <!-- Abstract Vector Background Graphics -->
+  <div class="bg-vector-container" aria-hidden="true">
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+    <svg class="bg-grid-svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+      <defs>
+        <pattern id="grid" width="45" height="45" patternUnits="userSpaceOnUse">
+          <path d="M 45 0 L 0 0 0 45" fill="none" stroke="rgba(255, 255, 255, 0.05)" stroke-width="1" />
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)" />
+    </svg>>
+    <!-- Canvas for freely moving, non-colliding animated lines -->
+    <canvas id="bgCanvas"></canvas>
+  </div>
+
+  <!-- Header Navigation -->
+  <header class="main-header glass-element">
+    <div class="container header-container">
+      <a href="#" class="logo-area">
+        <span class="logo-icon">LEXXOUS</span>
+        <span class="logo-text gradient-text">ÇEVİRİ</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#" class="active" id="navHome">Çeviriler</a>
+        <a href="#" onclick="showAboutModal(); return false;">Hakkımızda</a>
+        <button id="adminLoginTrigger" class="btn btn-secondary btn-sm icon-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span id="adminBtnText">Yönetici Girişi</span>
+        </button>
+        <button id="adminPanelTrigger" class="btn btn-primary btn-sm icon-btn hidden">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="9" y1="3" x2="9" y2="21"></line>
+          </svg>
+          <span>Yönetim Paneli</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section container">
+    <div class="hero-content">
+      <h1 class="gradient-text hero-title">Oyun Dünyasını Türkçe Keşfet.</h1>
+      <p class="hero-subtitle">En güncel, güvenilir ve virüssüz Türkçe yamalar tek adreste. Reklamsız, sade ve tamamen
+        açık kaynak ruhuyla.</p>
+
+      <!-- Premium Search Area -->
+      <div class="search-box-wrapper glass-element">
+        <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" placeholder="Oynamak istediğiniz oyunu arayın..." autocomplete="off">
+        <span class="search-hint">Toplam <strong id="totalGameCount">7</strong> yama listeleniyor</span>
+      </div>
+
+      <!-- Quick Platform Stats -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num gradient-text" id="statDownloads">0</span>
+          <span class="stat-label">Toplam İndirme</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num gradient-text" id="statAvgRating">?</span>
+          <span class="stat-label">Ortalama Puan</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num gradient-text" id="statUpdates">Yeni</span>
+          <span class="stat-label">Güncel Çeviriler</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catalog Section -->
+  <main class="catalog-section container">
+    <div class="catalog-header">
+      <div class="filters-group">
+        <!-- Category Selector -->
+        <div class="filter-category-row scroll-container">
+          <button class="filter-btn active" data-category="all">Tüm Türler</button>
+          <button class="filter-btn" data-category="RPG">RPG</button>
+          <button class="filter-btn" data-category="Aksiyon">Aksiyon</button>
+          <button class="filter-btn" data-category="Korku">Korku</button>
+          <button class="filter-btn" data-category="Macera">Macera</button>
+          <button class="filter-btn" data-category="Roguelike">Roguelike</button>
+        </div>
+
+        <!-- Platform Filter -->
+        <div class="filter-platform-row">
+          <span class="filter-label">Platform:</span>
+          <button class="platform-filter-btn active" data-platform="all">Hepsi</button>
+          <button class="platform-filter-btn" data-platform="PC">PC</button>
+          <button class="platform-filter-btn" data-platform="PS5">PS5</button>
+          <button class="platform-filter-btn" data-platform="Xbox">Xbox</button>
+          <button class="platform-filter-btn" data-platform="Switch">Switch</button>
+        </div>
+      </div>
+
+      <!-- Sort Controls -->
+      <div class="sort-group">
+        <label for="sortSelect">Sırala:</label>
+        <div class="select-wrapper">
+          <select id="sortSelect">
+            <option value="downloads">En Popüler</option>
+            <option value="rating">En Yüksek Puan</option>
+            <option value="newest">En Yeni Çıkanlar</option>
+            <option value="title">A-Z Alfabetik</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Translation Cards Grid -->
+    <div class="translations-grid" id="translationsGrid">
+      <!-- Cards will be dynamically injected here -->
+      <div class="loading-state">Yükleniyor...</div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="container footer-container">
+      <p>&copy; Bu site Berkay Erbay tarafından oluşturulmuştur, tüm hakları saklıdır.</p>
+      <div class="footer-links">
+        <a href="#" onclick="showAboutModal(); return false;">Hakkımızda</a>
+        <span>&bull;</span>
+        <a href="https://github.com/askadam31" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= MODALS & DIALOGS ================= -->
+
+  <!-- DETAIL MODAL -->
+  <dialog id="detailModal" closedby="any" aria-labelledby="detailTitle">
+    <div class="dialog-content glass-element">
+      <button class="close-btn" onclick="document.getElementById('detailModal').close()" aria-label="Kapat">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="detail-grid">
+        <!-- Left Side: Banner, Info, Actions -->
+        <div class="detail-left">
+          <div class="detail-banner-container">
+            <img id="detailBanner" src="" alt="Game Banner" class="detail-banner">
+            <div class="detail-status-badge" id="detailStatusBadge"></div>
+          </div>
+
+          <h2 id="detailTitle" class="gradient-text">Game Title</h2>
+          <div class="detail-meta-row">
+            <span class="detail-developer" id="detailDeveloper">Developer</span>
+            <span class="meta-dot">&bull;</span>
+            <span class="detail-category" id="detailCategory">Category</span>
+          </div>
+
+          <div class="detail-info-cards">
+            <div class="info-card">
+              <span class="info-card-label">Sürüm</span>
+              <span class="info-card-value" id="detailVersion">-</span>
+            </div>
+            <div class="info-card">
+              <span class="info-card-label">Çevirmen</span>
+              <span class="info-card-value" id="detailTranslator">-</span>
+            </div>
+            <div class="info-card">
+              <span class="info-card-label">Yayın Tarihi</span>
+              <span class="info-card-value" id="detailReleaseDate">-</span>
+            </div>
+          </div>
+
+          <!-- Platforms -->
+          <div class="detail-platforms-section">
+            <span class="section-sublabel">Uyumlu Platformlar:</span>
+            <div class="platform-badges" id="detailPlatforms"></div>
+          </div>
+
+          <!-- Actions -->
+          <div class="detail-actions">
+            <button id="downloadBtn" class="btn btn-primary btn-lg icon-btn">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Yamayı İndir</span>
+            </button>
+            <a id="githubBtn" href="#" target="_blank" rel="noopener" class="btn btn-secondary btn-lg icon-btn hidden">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                </path>
+              </svg>
+              <span>Kaynak Kod</span>
+            </a>
+          </div>
+
+          <div class="detail-stats-row">
+            <span class="detail-stat"><strong id="detailDownloadCount">0</strong> indirme</span>
+            <span class="meta-dot">&bull;</span>
+            <span class="detail-stat"><strong id="detailRatingVal">0</strong> / 5 (<span id="detailRatingCount">0</span>
+              oy)</span>
+          </div>
+        </div>
+
+        <!-- Right Side: Description, Rating, Comments -->
+        <div class="detail-right">
+          <div class="detail-desc-block">
+            <h3>Yama Açıklaması</h3>
+            <p id="detailDescription">Game description goes here...</p>
+          </div>
+
+          <!-- Rating Form -->
+          <div class="detail-rate-box glass-element">
+            <h4>Yamayı Değerlendir</h4>
+            <div class="star-rating-input" id="starRatingInput">
+              <button class="star-btn" data-value="1" aria-label="1 Yıldız">&#9733;</button>
+              <button class="star-btn" data-value="2" aria-label="2 Yıldız">&#9733;</button>
+              <button class="star-btn" data-value="3" aria-label="3 Yıldız">&#9733;</button>
+              <button class="star-btn" data-value="4" aria-label="4 Yıldız">&#9733;</button>
+              <button class="star-btn" data-value="5" aria-label="5 Yıldız">&#9733;</button>
+            </div>
+            <span class="rating-feedback" id="ratingFeedback">Bir oy seçin</span>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="detail-comments-section">
+            <h3>Kullanıcı Yorumları (<span id="commentCount">0</span>)</h3>
+
+            <!-- Comments List -->
+            <div class="comments-list" id="commentsList">
+              <!-- Dynamically loaded comments -->
+            </div>
+
+            <!-- New Comment Form -->
+            <form id="commentForm" class="comment-form">
+              <h4>Yorum Yap</h4>
+              <div class="form-row">
+                <input type="text" id="commentAuthor" placeholder="İsminiz veya Takma Adınız" required
+                  autocomplete="off">
+              </div>
+              <div class="form-row">
+                <textarea id="commentText" placeholder="Yama hakkındaki düşünceleriniz..." rows="3" required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">Yorum Gönder</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- LOGIN MODAL -->
+  <dialog id="loginModal" closedby="any" aria-labelledby="loginTitle">
+    <div class="dialog-content glass-element auth-modal">
+      <button class="close-btn" onclick="document.getElementById('loginModal').close()" aria-label="Kapat">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <h2 id="loginTitle" class="gradient-text text-center">Yönetici Girişi</h2>
+      <p class="auth-subtitle text-center">Platformu yönetmek ve yeni yama eklemek için oturum açın.</p>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginUser">Kullanıcı Adı</label>
+          <input type="text" id="loginUser" required autocomplete="username" placeholder="admin">
+        </div>
+        <div class="form-group">
+          <label for="loginPass">Şifre</label>
+          <input type="password" id="loginPass" required autocomplete="current-password" placeholder="••••••••">
+        </div>
+        <div class="form-error hidden" id="loginError">Kullanıcı adı veya şifre hatalı!</div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Giriş Yap</button>
+      </form>
+      <div class="text-center auth-tip">Varsayılan Bilgiler: admin / admin123</div>
+    </div>
+  </dialog>
+
+  <!-- ADMIN PANEL MODAL -->
+  <dialog id="adminPanelModal" closedby="any" aria-labelledby="adminTitle">
+    <div class="dialog-content glass-element admin-modal">
+      <header class="admin-modal-header">
+        <h2 id="adminTitle" class="gradient-text">Yönetim Paneli</h2>
+        <div class="admin-header-actions">
+          <button id="addNewYamaBtn" class="btn btn-primary btn-sm icon-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Yeni Çeviri Ekle</span>
+          </button>
+          <button id="adminLogoutBtn" class="btn btn-secondary btn-sm">Çıkış Yap</button>
+          <button class="close-btn-inline" onclick="document.getElementById('adminPanelModal').close()"
+            aria-label="Kapat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Split Layout for Dashboard: Left list, Right Editor -->
+      <div class="admin-split-layout">
+        <!-- Yamas List -->
+        <div class="admin-list-panel">
+          <h3>Çeviri Listesi</h3>
+          <div class="admin-yamas-list" id="adminYamasList">
+            <!-- Dynamically populated rows -->
+          </div>
+        </div>
+
+        <!-- Form Panel (Initially hidden or shows help) -->
+        <div class="admin-form-panel" id="adminFormPanel">
+          <div class="empty-form-state" id="emptyFormState">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+              stroke-linecap="round" stroke-linejoin="round" class="glow-icon">
+              <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+              <path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+            </svg>
+            <p>Düzenlemek için listeden bir yama seçin veya yeni bir yama eklemek için "Yeni Çeviri Ekle" butonuna
+              tıklayın.</p>
+          </div>
+
+          <!-- Add / Edit Translation Form -->
+          <form id="yamaCrudForm" class="yama-crud-form hidden">
+            <h3 id="formPanelTitle">Çeviri Düzenle</h3>
+            <input type="hidden" id="yamaId">
+
+            <div class="form-row-grid">
+              <div class="form-group">
+                <label for="yamaTitle">Oyun Adı *</label>
+                <input type="text" id="yamaTitle" required placeholder="Örn: Elden Ring">
+              </div>
+              <div class="form-group">
+                <label for="yamaDeveloper">Geliştirici / Yayıncı *</label>
+                <input type="text" id="yamaDeveloper" required placeholder="Örn: FromSoftware">
+              </div>
+            </div>
+
+            <div class="form-row-grid">
+              <div class="form-group">
+                <label for="yamaCategory">Oyun Türü *</label>
+                <input type="text" id="yamaCategory" required placeholder="Örn: RPG, Aksiyon">
+              </div>
+              <div class="form-group">
+                <label for="yamaTranslator">Çeviri Grubu / Çevirmen *</label>
+                <input type="text" id="yamaTranslator" required placeholder="Örn: AGY Çeviri">
+              </div>
+            </div>
+
+            <div class="form-row-grid">
+              <div class="form-group">
+                <label for="yamaVersion">Yama Sürümü *</label>
+                <input type="text" id="yamaVersion" required placeholder="Örn: v1.0">
+              </div>
+              <div class="form-group">
+                <label for="yamaReleaseDate">Yayın Tarihi *</label>
+                <input type="date" id="yamaReleaseDate" required>
+              </div>
+            </div>
+
+            <div class="form-row-grid">
+              <div class="form-group">
+                <label for="yamaStatus">Yama Durumu *</label>
+                <select id="yamaStatus" required>
+                  <option value="Tamamlandı">Tamamlandı (%100)</option>
+                  <option value="Beta / Güncelleniyor">Beta / Güncelleniyor</option>
+                  <option value="Yapım Aşamasında">Yapım Aşamasında</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="yamaProgress">Çeviri Yüzdesi (%) *</label>
+                <input type="number" id="yamaProgress" min="0" max="100" required value="100">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Uyumlu Platformlar *</label>
+              <div class="checkbox-group">
+                <label><input type="checkbox" name="yamaPlatforms" value="PC"> PC</label>
+                <label><input type="checkbox" name="yamaPlatforms" value="PS5"> PS5</label>
+                <label><input type="checkbox" name="yamaPlatforms" value="Xbox"> Xbox</label>
+                <label><input type="checkbox" name="yamaPlatforms" value="Switch"> Switch</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="yamaDescription">Yama Açıklaması *</label>
+              <textarea id="yamaDescription" rows="3" required
+                placeholder="Yamayla ilgili detaylı açıklama yazın..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="yamaImageUrl">Görsel / Banner URL'i *</label>
+              <input type="url" id="yamaImageUrl" required placeholder="Görsel linki (Unsplash vb.)">
+              <div class="image-preview-box" id="imagePreviewBox">
+                <span>Görsel Önizleme</span>
+                <img src="" alt="Önizleme" id="yamaFormImagePreview" class="hidden">
+              </div>
+            </div>
+
+            <div class="form-row-grid">
+              <div class="form-group">
+                <label for="yamaDownloadUrl">İndirme Linki *</label>
+                <input type="text" id="yamaDownloadUrl" required placeholder="# veya dosya indirme linki">
+              </div>
+              <div class="form-group">
+                <label for="yamaGithubUrl">GitHub Linki (Opsiyonel)</label>
+                <input type="url" id="yamaGithubUrl" placeholder="https://github.com/...">
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <style>
+                #saveYamaBtn{
+                  width: 100px;  
+                  height: 30px;
+                }
+                #cancelYamaFormBtn{
+                  width: 100px;  
+                  height: 30px;
+                }
+              </style>
+              <button type="submit" class="btn btn-primary" id="saveYamaBtn">Kaydet</button>
+              <button type="button" class="btn btn-secondary" id="cancelYamaFormBtn">İptal</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- HAKKIMIZDA MODAL (Simple Native Dialog) -->
+  <dialog id="aboutModal" closedby="any" aria-labelledby="aboutTitle">
+    <div class="dialog-content glass-element text-center">
+      <style>
+
+      </style>
+      <button class="close-btn" onclick="document.getElementById('aboutModal').close()" aria-label="Kapat">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 id="aboutTitle" class="gradient-text">Hakkımızda</h2>
+      <p style="margin: 20px 0; line-height: 1.6; color: var(--color-text);">
+        <strong>LEXXOUS</strong>, oyuncuların en sevdikleri yapımları kendi dillerinde,
+        reklamlara boğulmadan ve güvenli bir şekilde deneyimleyebilmeleri amacıyla kurulmuş bağımsız bir platformdur.
+      </p>
+      <p style="margin-bottom: 20px; line-height: 1.6; color: var(--color-text-muted);">
+        Açık kaynak ruhuyla hareket eden çevirmenlerin projelerini özgürce sergileyebileceği ve oyuncularla
+        buluşturabileceği sade bir köprü olmayı hedefliyoruz.
+      </p>
+      <button style="width: 100px; height: 30px;" onclick="document.getElementById('aboutModal').close()" class="btn btn-primary">Kapat</button>
+    </div>
+  </dialog>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- Javascript Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/bg-lines.js"></script>
+</body>
+
+</html>
