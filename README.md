@@ -1,6 +1,6 @@
-# TR-NEXUS | Türkçe Yama Platformu
+# LEXXOUS | Türkçe Yama Platformu
 
-TR-NEXUS, PC oyunları için Türkçe yamaları keşfetmeyi, incelemeyi ve yönetmeyi sağlayan bir web platformudur. Node.js, Express ve MongoDB altyapısıyla geliştirilen proje, oyun yamalarının merkezi bir veritabanında saklanmasını ve tüm ziyaretçilere aynı verilerin sunulmasını amaçlar.
+LEXXOUS, PC oyunları için Türkçe yamaları keşfetmeyi, incelemeyi ve yönetmeyi sağlayan bir web platformudur. Node.js, Express ve MongoDB altyapısıyla geliştirilen proje, oyun yamalarının merkezi bir veritabanında saklanmasını ve tüm ziyaretçilere aynı verilerin sunulmasını amaçlar.
 
 ## Özellikler
 
@@ -168,4 +168,4 @@ Bu projeye ait lisans henüz belirtilmemiştir. Yeniden kullanım ve dağıtım 
 
 ---
 
-**TR-NEXUS — Oyunlar için Türkçe yama platformu.**
+**LEXXOUS — Oyunlar için Türkçe yama platformu.**
