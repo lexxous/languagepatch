@@ -1,6 +1,6 @@
 # Turkish Patch Platform
 
-## Screenshots
+A web platform for discovering, reviewing, and managing Turkish language patches for PC games. Built with Node.js, Express, and MongoDB, the project provides a centralized database for storing and sharing patch information.
 
 ### Homepage
 
@@ -9,8 +9,6 @@
 ### Admin Panel
 
 ![Admin Panel](screenshots/sc2.png)
-
-A web platform for discovering, reviewing, and managing Turkish language patches for PC games. Built with Node.js, Express, and MongoDB, the project provides a centralized database for storing and sharing patch information.
 
 ## Features
 
