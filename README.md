@@ -165,5 +165,3 @@ Projeye katkıda bulunmak için:
 ## Lisans
 
 Bu projeye ait lisans henüz belirtilmemiştir. Yeniden kullanım ve dağıtım koşulları için repository sahibinin lisans tercihi açıklanmalıdır.
-
----
