@@ -167,5 +167,3 @@ Projeye katkıda bulunmak için:
 Bu projeye ait lisans henüz belirtilmemiştir. Yeniden kullanım ve dağıtım koşulları için repository sahibinin lisans tercihi açıklanmalıdır.
 
 ---
-
-**Oyunlar için Türkçe yama platformu.**
