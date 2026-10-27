@@ -9,7 +9,7 @@ Bu sürüm LocalStorage yerine Node.js + Express + MongoDB kullanır. Panelden e
 3. Bağımlılıkları kurun:
 
 ```bash
-npm installgit add README.md
+npm install git add README.md
 ```
 
 4. `.env` dosyasını kontrol edin:
