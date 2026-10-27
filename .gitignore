@@ -1,8 +1,2 @@
 node_modules
 .env
-dist/
-build/
-middleware/
-models/
-routes/
-public/
